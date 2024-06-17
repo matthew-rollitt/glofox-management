@@ -1,9 +1,10 @@
 from flask import Flask, json, jsonify, render_template, request, session, redirect, url_for
 import firebase_admin
 from firebase_admin import credentials, auth, firestore
-from faker import Faker
 from datetime import datetime, timedelta
 from jsonify import convert
+from faker import Faker
+
 
 import random
 fake = Faker()
@@ -18,6 +19,28 @@ with open('/Users/admin/go/Code/glofox-management/firebase/secret.json', 'r') as
 cred = credentials.Certificate('/Users/admin/go/Code/glofox-management/firebase/femmanagment-firebase-adminsdk-x7yr6-c361ab0e3b.json')
 firebase_admin.initialize_app(cred)
 db = firestore.client()
+
+@app.route('/get-users', methods=['GET'])
+def get_users():
+    status = request.args.get('status', default=None, type=str)
+    users_ref = db.collection('Users')
+    if status:
+        query_ref = users_ref.where('status', '==', status)
+    else:
+        query_ref = users_ref
+    users = query_ref.stream()
+    users_list = []
+    for user in users:
+        user_dict = user.to_dict()
+        users_list.append({
+            'MembershipID': user_dict.get('MembershipID'),
+            'name': user_dict.get('name'),
+            'membership': user_dict.get('membership'),
+            'email': user_dict.get('email'),
+            'status': user_dict.get('status')  # Ensure 'status' field exists in Firestore documents
+        })
+
+    return jsonify(users_list)
 
 def add_users_to_firestore(num_users):
     for _ in range(num_users):
@@ -107,6 +130,30 @@ def pause_membership():
     except Exception as e:
         print(f"Error updating membership status: {e}")
         return jsonify({"error": str(e)}), 500
+
+@app.route('/cancel-membership', methods=['POST'])
+def cancel_membership():
+    try:
+        data = request.get_json()
+        user_id = data['userId'].strip()
+        print("userId: " + user_id)
+        user_ref = db.collection('Users').where('MembershipID', '==', int(user_id)).get()
+        
+        # Check if user with the given MembershipID exists
+        if user_ref:
+            for user_doc in user_ref:
+                user_data = user_doc.to_dict()
+                user_data['status'] = 'Cancelled'
+                user_doc.reference.update(user_data)
+                print("Membership status cancelled successfully.")
+            return jsonify({"message": "Membership status updated successfully."}), 200
+        else:
+            print("No user found with the specified MembershipID.")
+            return jsonify({"message": "No user found with the specified MembershipID."}), 404
+    except Exception as e:
+        print(f"Error updating membership status: {e}")
+        return jsonify({"error": str(e)}), 500
+
 
 
 def add_weekly_to_firestore(num_weeks):

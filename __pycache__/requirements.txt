@@ -1,4 +1,0 @@
-Flask==2.0.2
-firebase-admin==5.3.1
-faker==10.14.1
-

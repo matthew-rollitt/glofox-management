@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "../__pycache__"
+		},
+		{
+			"path": "../firebase"
+		},
+		{
+			"path": "../static"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {}
+}

@@ -32,87 +32,162 @@
     <input type="text" name="searchUsername" id="searchUsername" class="form-control" onkeyup="filterByUsername()">
 </div>
 
-    <!-- User Table -->
-    <div class="table-responsive mt-4">
-        <table id="userTable" class="table table-bordered table-sm">
-            <thead class="thead-dark">
-                <tr>
-                    <th onclick="sortTable(0)">Name</th>
-                    <th onclick="sortTable(1)">Membership</th>
-                    <th onclick="sortTable(2)">Email</th>
-                    <th> Edit</th>
-                    <th onclick="sortTable(3)">Pause</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Loop through users -->
-                {% for user in users %}
-                <tr {% if user.status == 'Paused' %}style="background-color: orange;"{% endif %}>
-                    <td>{{ user.name }}</td>
-                    <td>{{ user.membership }}</td>
-                    <td>{{ user.email }}</td>
-                    <td class="text-center">
-                        <!-- Edit icon -->
-                        <div onclick="openEditPopup('{{ user.MembershipID }}')" style="cursor: pointer;">
-                            <img src="{{ url_for('static', filename='edit.png') }}" alt="Edit" class="icon">
-                        </div>
-                    </td>
-                    <td class="text-center">
-                        <!-- Pause icon -->
-                        <div onclick="pauseMembership('{{ user.MembershipID }}')" style="cursor: pointer;">
-                            <img src="{{ url_for('static', filename='pause.png') }}" alt="Pause" class="icon">
-                        </div>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-</div>
+<div class="container">
+    <!-- Tabs for Active, Paused, and Inactive Users -->
+    <ul class="nav nav-tabs mb-4" id="userStatusTabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="active-tab" data-toggle="tab" href="#activeUsers" role="tab" aria-controls="activeUsers" aria-selected="true">Active Users</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="paused-tab" data-toggle="tab" href="#pausedUsers" role="tab" aria-controls="pausedUsers" aria-selected="false">Paused Users</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="inactive-tab" data-toggle="tab" href="#inactiveUsers" role="tab" aria-controls="inactiveUsers" aria-selected="false">Inactive Users</a>
+        </li>
+    </ul>
 
-<!-- Add a hidden pop-up box for editing user info -->
-<div id="editPopup" class="modal" tabindex="-1" role="dialog" style="display: none;">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Edit Information for <span id="userNameTitle"></span></h5>
-                <button type="button" class="close" onclick="closeEditPopup()" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+    <!-- Tab content -->
+    <div class="tab-content" id="userStatusTabsContent">
+        <!-- Active Users Tab -->
+        <div class="tab-pane fade show active" id="activeUsers" role="tabpanel" aria-labelledby="active-tab">
+            <div class="table-responsive">
+                <table class="table table-bordered table-sm">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th onclick="sortTable(0)">Name</th>
+                            <th onclick="sortTable(1)">Membership</th>
+                            <th onclick="sortTable(2)">Email</th>
+                            <th>Edit</th>
+                            <th>Pause</th>
+                            <th>Cancel</th>
+                        </tr>
+                    </thead>
+                    <tbody id="activeUsersBody">
+                        <!-- Active Users will be dynamically inserted here -->
+                    </tbody>
+                </table>
             </div>
-            <div class="modal-body">
-                <form id="updateMembershipForm" action="/update-membership" method="post">
-                    <input type="hidden" name="userId" id="userIdInput">
-                    <h5 class="modal-title">User ID: <span id="userIdTitle"></span></h5>
-                    
-                    <label for="name">Name:</label>
-                    <input type="text" name="name" id="nameInput" class="form-control">
-                    
-                    <label for="email">Email:</label>
-                    <input type="email" name="email" id="emailInput" class="form-control">
-                    
-                    <label for="membership">Membership:</label>
-                    <select name="membership" id="membership" class="form-control">
-                        <option value="Like">Like</option>
-                        <option value="Love">Love</option>
-                        <option value="Talk">Talk</option>
-                    </select>
-                    
-                    <label for="status" id="status">Status:</label>
-                    <select name="status" id="status" class="form-control">
-                        <option value="suspend">Suspend</option>
-                        <option value="reactivate">Reactivate</option>
-                    </select>
-                    
-                    <input type="submit" value="Update" class="btn btn-primary mt-2">
-                    <input type="button" value="Cancel" class="btn btn-danger mt-2" onclick="closeEditPopup()">
-                </form>                
+        </div>
+
+        <!-- Paused Users Tab -->
+        <div class="tab-pane fade" id="pausedUsers" role="tabpanel" aria-labelledby="paused-tab">
+            <div class="table-responsive">
+                <table class="table table-bordered table-sm">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th onclick="sortTable(0)">Name</th>
+                            <th onclick="sortTable(1)">Membership</th>
+                            <th onclick="sortTable(2)">Email</th>
+                            <th>Edit</th>
+                            <th>Action</th>
+                            <th>Cancel</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pausedUsersBody">
+                        <!-- Paused Users will be dynamically inserted here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Inactive Users Tab -->
+        <div class="tab-pane fade" id="inactiveUsers" role="tabpanel" aria-labelledby="inactive-tab">
+            <div class="table-responsive">
+                <table class="table table-bordered table-sm">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th onclick="sortTable(0)">Name</th>
+                            <th onclick="sortTable(1)">Membership</th>
+                            <th onclick="sortTable(2)">Email</th>
+                            <th>Edit</th>
+                            <th>Action</th>
+                            <th>Cancel</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inactiveUsersBody">
+                        <!-- Inactive Users will be dynamically inserted here -->
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 </div>
 
+{% include 'edit_popup.html' %}
 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    // Initial view: Active Users
+
+    // Add event listeners to tabs
+    var tabs = document.querySelectorAll('.nav-link');
+    tabs.forEach(function(tab) {
+        tab.addEventListener('click', function(event) {
+            event.preventDefault();
+            var target = this.getAttribute('aria-controls');
+            displayUsers(target.replace('Users', '').toLowerCase());
+        });
+    });
+
+// Function to fetch and display users based on status
+function displayUsers(status) {
+    fetch('/get-users')
+        .then(response => response.json())
+        .then(users => {
+            // Clear existing rows
+            document.getElementById(status + 'UsersBody').innerHTML = '';
+            // Filter users based on status and populate table
+            users.forEach(function(user) {
+                // print out user with status 
+                if (user.status.toLowerCase() === status.toLowerCase()) {
+                    console.log("user: "+ user.name +"status: "+ user.status.toLowerCase());
+                    var row = '<tr>' +
+                        '<td>' + user.name + '</td>' +
+                        '<td>' + user.membership + '</td>' +
+                        '<td>' + user.email + '</td>' +
+                        '<td class="text-center">' +
+                        '<div onclick="openEditPopup(\'' + user.MembershipID + '\')" style="cursor: pointer;">' +
+                        '<img src="/static/edit.png" alt="Edit" class="icon">' +
+                        '</div>' +
+                        '</td>' +
+                        '<td class="text-center">' + getActionHTML(status, user.MembershipID) + '</td>' +
+                        '<td class="text-center">' +
+                        '<div onclick="cancelMembership(\'' + user.MembershipID + '\')" style="cursor: pointer;">' +
+                        '<img src="/static/cancel.png" alt="Cancel" class="icon">' +
+                        '</div>' +
+                        '</td>' +
+                        '</tr>';
+                    document.getElementById(status + 'UsersBody').innerHTML += row;
+                }
+            });
+        })
+        .catch(error => console.error('Error fetching users:', error));
+}
+
+displayUsers('active');
+
+    // Function to generate action button based on user status
+    function getActionHTML(status, membershipID) {
+        // status to lowerstring
+        status = status.toLowerCase();
+        switch (status) {
+            case 'active':
+                return '<div onclick="pauseMembership(\'' + membershipID + '\')" style="cursor: pointer;">' +
+                    '<img src="/static/pause.png" alt="Pause" class="icon">' +
+                    '</div>';
+            case 'paused':
+                return '<div onclick="resumeMembership(\'' + membershipID + '\')" style="cursor: pointer;">' +
+                    '<img src="/static/play.png" alt="Resume" class="icon" width="20" height="20">' +
+                    '</div>';
+            case 'cancelled':
+                return '<div onclick="activateMembership(\'' + membershipID + '\')" style="cursor: pointer;">' +
+                    '<img src="/static/play.png" alt="Resume" class="icon" width="20" height="20">' +
+                    '</div>';
+            default:
+                return '';
+        }
+    }
+});
+
 document.addEventListener('DOMContentLoaded', function() {
     var users = JSON.parse('{{ users | tojson | safe }}');
     var membershipCounts = users.reduce((acc, user) => {

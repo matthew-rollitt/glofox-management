@@ -11,6 +11,33 @@ function openEditPopup(userId, userName, email, membership, pauseweeks, status) 
     console.log(status);
 }
 
+function cancelMembership(userId) {
+    // Assuming you have the user's ID and a server endpoint to handle the cancellation
+    fetch('/cancel-membership', {
+        method: 'POST', // or 'PUT'
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userId: userId }), // Send the user ID to the server
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        }
+        throw new Error('Network response was not ok.');
+    })
+    .then(data => {
+        console.log(data.message); // Assuming the server responds with a message
+        alert('Membership cancelled successfully.');
+        // Here you can add code to update the UI accordingly
+    })
+    .catch((error) => {
+        console.error('There was a problem with the cancellation request:', error);
+        alert('Failed to cancel membership. Please try again.');
+    });
+}
+
+
 function closeEditPopup() {
     document.getElementById('editPopup').style.display = 'none';
 }
