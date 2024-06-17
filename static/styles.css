@@ -1,0 +1,79 @@
+body {
+    background-color: #ffffff; /* Dark blue background */
+    color: #353535; /* White text */
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+}
+
+.login-box {
+    background-color: #343a40; /* Dark gray background */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.5); /* Shadow effect */
+}
+
+
+#pauseWeeks {
+    display: none;
+}
+
+#status {
+    display: none;
+}
+
+
+/* Custom CSS for your membership dashboard */
+
+/* Body and container styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.container {
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Chart styles */
+canvas {
+    max-width: 100%;
+}
+
+/* Table styles */
+.table {
+    font-size: 14px;
+}
+
+/* Edit and pause icons */
+.icon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+/* Search box */
+#searchUsername {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Modal styles (customize as needed) */
+.modal-dialog {
+    max-width: 400px;
+}
+
+/* Optional: Add hover effect for table rows */
+.table tbody tr:hover {
+    background-color: #f8f9fa;
+}

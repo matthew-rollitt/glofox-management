@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js"></script>
+
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <h1 class="text-center mb-4">Login</h1>
+            <button class="btn btn-primary d-block mx-auto mb-3" onclick="login()">Login with Google</button>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (optional, only if you need JavaScript features) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAm_OBRYuaLJazvNKE9BCpy8rbN1YuWk7M",
+            authDomain: "femmanagment.firebaseapp.com",
+            projectId: "femmanagment",
+            storageBucket: "femmanagment.appspot.com",
+            messagingSenderId: "569773719747",
+            appId: "1:569773719747:web:6b8afb7acfac05da89a276",
+            measurementId: "G-PYWTT9FNNG"
+        };
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+
+        function login() {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            firebase.auth()
+                .signInWithPopup(provider)
+                .then((result) => {
+                    result.user.getIdToken().then((idToken) => {
+                        const form = document.createElement('form');
+                        form.method = 'POST';
+                        form.action = '/login';
+
+                        const input = document.createElement('input');
+                        input.type = 'hidden';
+                        input.name = 'idToken';
+                        input.value = idToken;
+                        form.appendChild(input);
+
+                        document.body.appendChild(form);
+                        form.submit();
+                    });
+                }).catch((error) => {
+                    console.error(error);
+                });
+        }
+    </script>
+</body>
+</html>
