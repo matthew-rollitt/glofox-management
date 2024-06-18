@@ -4,6 +4,11 @@
 {% endblock %}
 {% block body %}
 <div class="container-fluid">
+    <div>
+        <h3>Weekly Users: <span id="weekly-users">Loading...</span></h3>
+        <h3>Monthly Users: <span id="monthly-users">Loading...</span></h3>
+        <h4>Percent Change: {{ percent_change }}%</h4>
+    </div>
     <div class="row">
         <!-- Sidebar -->
         <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
@@ -25,6 +30,7 @@
             </div>
         </nav>
         
+     
         <!-- Main content area -->
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <div class="container mt-5">
@@ -328,6 +334,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 return '#808080';
         }
     }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    fetch('/get-weekly-and-monthly-users')
+        .then(response => response.json())
+        .then(data => {
+            // Assuming the response data has properties 'weeklyUsers' and 'monthlyUsers'
+            document.getElementById('weekly-users').textContent = data.weeklyUsers;
+            document.getElementById('monthly-users').textContent = data.monthlyUsers;
+            console.log(data.monthlyUsers);
+        })
+        .catch(error => console.error('Error fetching user data:', error));
 });
 </script>
 {% endblock %}
