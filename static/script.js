@@ -55,7 +55,12 @@ function filterByUsername() {
     var input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("searchUsername");
     filter = input.value.toUpperCase();
-    table = document.getElementById("userTable");
+    
+    // Choose the correct tbody based on active tab
+    var activeTab = document.querySelector('.nav-link.active');
+    var target = activeTab.getAttribute('aria-controls');
+    table = document.getElementById(target + "Body"); // Adjust here
+    
     tr = table.getElementsByTagName("tr");
     for (i = 0; i < tr.length; i++) {
         td = tr[i].getElementsByTagName("td")[0];
@@ -69,6 +74,7 @@ function filterByUsername() {
         }       
     }
 }
+
 function pauseMembership(userId) {
     console.log('Pausing');
     console.log('Pausing membership for user:', userId);

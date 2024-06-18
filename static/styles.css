@@ -26,6 +26,21 @@ body {
     display: none;
 }
 
+.sidebar {
+    background: linear-gradient(0deg,orange, gold);
+    padding: 20px;
+    padding-top: 150px;
+    height: 100vh; /* Full height */
+}
+
+.nav-link {
+    color: #000;
+}
+
+.nav-link:hover {
+    background-color: #ddd;
+    color: black;
+}
 
 /* Custom CSS for your membership dashboard */
 
