@@ -83,21 +83,19 @@ def index():
     try:
         users_ref = db.collection('Users')
         users = [doc.to_dict() for doc in users_ref.stream()]
-
         weekly_users_ref = db.collection('WeeklyUsers')
         weekly_users = [doc.to_dict() for doc in weekly_users_ref.stream()]
-        # get the current week and compare it to the last month of the weekly users
-        # and get the difference between the two and the % change 
-    
-        current_week = weekly_users[-1]
-        last_month = weekly_users[-4]
-        last_month_users = last_month['total_users']
-        current_week_users = current_week['total_users']
+        current_week_users = weekly_users[-1]['total_users']
+        last_week = weekly_users[-2]['total_users']
+        last_month_users = weekly_users[-5]['total_users']
+        percent_change_week = round(((current_week_users - last_week) / last_week) * 100, 2)
+        percent_change_month = round(((current_week_users - last_month_users) / last_month_users) * 100, 2)
 
-        percent_change = ((current_week_users - last_month_users) / last_month_users) * 100
-        # round to 2 decimal places
-        percent_change = round(percent_change, 2)
-        return render_template('index.html', users=users, percent_change=percent_change)
+        return render_template('index.html', users=users,
+                                current_week_users=current_week_users,
+                                last_month_users=last_month_users,
+                                percent_change_week=percent_change_week,
+                                percent_change_month=percent_change_month)
     except Exception as e:
         return handle_firestore_error(e)
 
