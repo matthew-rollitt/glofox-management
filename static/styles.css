@@ -57,7 +57,7 @@ body {
 
 .container {
     padding: 20px;
-    background-color: #ffffff;
+    background-color: #f8f9fa;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -102,12 +102,13 @@ canvas {
     background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    width: 350px;
     padding: 20px;
     display: flex;
     flex-direction: column;
-    margin-left: 25px;
+    margin-left: 40px;
     margin-right: 25px;
+    margin-bottom: 25px;
 }
 
 .card-header {
@@ -127,7 +128,7 @@ canvas {
 }
 
 .card-body {
-    margin-top: 20px;
+    margin-top: 0px;
 
 }
 
@@ -164,4 +165,16 @@ canvas {
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
     border-bottom: 6px solid green;
+}
+
+.dashboard {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-bottom: 25px;
 }
