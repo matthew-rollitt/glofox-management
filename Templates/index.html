@@ -4,11 +4,6 @@
 {% endblock %}
 {% block body %}
 <div class="container-fluid">
-    <div>
-        <h3>Weekly Users: <span id="weekly-users">Loading...</span></h3>
-        <h3>Monthly Users: <span id="monthly-users">Loading...</span></h3>
-        <h4>Percent Change: {{ percent_change }}%</h4>
-    </div>
     <div class="row">
         <!-- Sidebar -->
         <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
@@ -35,6 +30,23 @@
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <div class="container mt-5">
                 <!-- Charts -->
+
+                <div class="row">
+                    <!-- Stacked Bar Chart -->
+                    <div class="col-md-6 mb-4">
+                        <h4 class="mb-3">Membership Distribution</h4>
+                        <p> Weekly Change: {{ percent_change_week }}%</p>
+
+                    </div>
+                    <!-- Pie Chart -->
+                    <div class="col-md-6 mb-4">
+                        <h4 class="mb-3">Membership Proportion</h4>
+                        <!--  percent_change_weekly_users-->
+                        <p> Monthly Change: {{ percent_change_month }}%</p>
+                    </div>
+                </div>
+
+
                 <div class="row">
                     <!-- Stacked Bar Chart -->
                     <div class="col-md-6 mb-4">
