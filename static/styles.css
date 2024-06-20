@@ -1,5 +1,10 @@
 body {
-    background-color: #ffffff; /* Dark blue background */
+    background-color: #b04d4d; /* Dark blue background */
+    color: #353535; /* White text */
+}
+
+card-body {
+    background-color: #b04d4d; /* Dark blue background */
     color: #353535; /* White text */
 }
 
@@ -91,4 +96,72 @@ canvas {
 /* Optional: Add hover effect for table rows */
 .table tbody tr:hover {
     background-color: #f8f9fa;
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+}
+
+.menu {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.card-body {
+    margin-top: 20px;
+
+}
+
+.title {
+    font-size: 1.2em;
+    color: #555;
+}
+
+.value {
+    font-size: 2.5em;
+    color: #000;
+    font-weight: bold;
+}
+
+.percentage {
+    font-size: 0.8em;
+    color: green;
+    background-color: #e0f7e0;
+    padding: 2px 4px;
+    border-radius: 4px;
+    margin-left: 10px;
+    display: inline-flex;
+    align-items: center;
+}
+
+
+.arrow {
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+}
+
+.arrow.up {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-bottom: 6px solid green;
 }

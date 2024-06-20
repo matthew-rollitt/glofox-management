@@ -31,21 +31,28 @@
             <div class="container mt-5">
                 <!-- Charts -->
 
+                
                 <div class="row">
-                    <!-- Stacked Bar Chart -->
-                    <div class="col-md-6 mb-4">
-                        <h4 class="mb-3">Membership Distribution</h4>
-                        <p> Weekly Change: {{ percent_change_week }}%</p>
-
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="title">Weekly Change</div>
+                            <div class="value">
+                                {{ percent_change_week }}% <span class="percentage"><i class="arrow up"></i></span>
+                            </div>
+                        </div>
                     </div>
-                    <!-- Pie Chart -->
-                    <div class="col-md-6 mb-4">
-                        <h4 class="mb-3">Membership Proportion</h4>
-                        <!--  percent_change_weekly_users-->
-                        <p> Monthly Change: {{ percent_change_month }}%</p>
+                    
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="title">Monthy change</div>
+                            <div class="value">
+                                {{ percent_change_month }}%<span class="percentage"><i class="arrow up"></i></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
+               
 
                 <div class="row">
                     <!-- Stacked Bar Chart -->
