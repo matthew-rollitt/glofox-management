@@ -90,12 +90,14 @@ def index():
         last_month_users = weekly_users[-5]['total_users']
         percent_change_week = round(((current_week_users - last_week) / last_week) * 100, 2)
         percent_change_month = round(((current_week_users - last_month_users) / last_month_users) * 100, 2)
+        active_users = len([user for user in users if user['status'] == 'Active'])
 
         return render_template('index.html', users=users,
                                 current_week_users=current_week_users,
                                 last_month_users=last_month_users,
                                 percent_change_week=percent_change_week,
-                                percent_change_month=percent_change_month)
+                                percent_change_month=percent_change_month,
+                                total_active_users=active_users)
     except Exception as e:
         return handle_firestore_error(e)
 

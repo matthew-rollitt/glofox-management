@@ -22,7 +22,6 @@ card-body {
     box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.5); /* Shadow effect */
 }
 
-
 #pauseWeeks {
     display: none;
 }
@@ -99,16 +98,14 @@ canvas {
 }
 
 .card {
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 350px;
-    padding: 20px;
+    width: 240px;
     display: flex;
     flex-direction: column;
-    margin-left: 40px;
-    margin-right: 25px;
-    margin-bottom: 25px;
+    padding: 20px;
+    margin: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .card-header {
@@ -133,14 +130,17 @@ canvas {
 }
 
 .title {
-    font-size: 1.2em;
+    font-size: 1.0em;
     color: #555;
 }
 
 .value {
-    font-size: 2.5em;
+    font-size: 2em;
     color: #000;
     font-weight: bold;
+}
+.row{
+    margin: 0px;
 }
 
 .percentage {
@@ -154,17 +154,27 @@ canvas {
     align-items: center;
 }
 
+.percentage.negative {
+    background-color: #ffaaaa;
+}
+
 
 .arrow {
     width: 0;
     height: 0;
     margin-left: 2px;
+
 }
 
 .arrow.up {
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
     border-bottom: 6px solid green;
+}
+.arrow.down {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 6px solid red;
 }
 
 .dashboard {

@@ -28,16 +28,18 @@
      
         <!-- Main content area -->
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-            <div class="container mt-5">
-                <!-- Charts -->
-
-                
                 <div class="row">
                     <div class="card">
                         <div class="card-body">
                             <div class="title">Weekly Change</div>
                             <div class="value">
-                                {{ percent_change_week }}% <span class="percentage"><i class="arrow up"></i></span>
+                                {{ percent_change_month }}%<span class="percentage">
+                                    {% if percent_change_month < 0 %}
+                                        <i class="arrow down"></i>
+                                    {% else %}
+                                        <i class="arrow up"></i>
+                                    {% endif %}
+                                    </span>                 
                             </div>
                         </div>
                     </div>
@@ -46,12 +48,38 @@
                         <div class="card-body">
                             <div class="title">Monthy change</div>
                             <div class="value">
-                                {{ percent_change_month }}%<span class="percentage"><i class="arrow up"></i></span>
+                                {{ percent_change_month }}%<span class="percentage negative">
+                                {% if percent_change_month > 0 %}
+                                    <i class="arrow down"></i>
+                                {% else %}
+                                    <i class="arrow up"></i>
+                                {% endif %}
+                                </span>
                             </div>
                         </div>
                     </div>
-                </div>
 
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="title">Total Active Dancers</div>
+                            <div class="value">
+                                {{ total_active_users }}
+                                </span>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <!-- end of row-->
+                
+                    
+                    
+              <!-- Weekly Users Timeline -->
+             <div class="dashboard">
+                <div class="col-12">
+                    <h2 class="mb-3">Weekly Users Timeline</h2>
+                    <canvas id="timelineChart"></canvas>
+                </div>
+                </div>
                 <div class="dashboard">
                     <!-- Stacked Bar Chart -->
                         <h2 class="mb-3">Membership Distribution</h2>
@@ -63,14 +91,7 @@
                         <canvas id="pieChart"></canvas>
                     </div>
 
-                <!-- Weekly Users Timeline -->
-                <div class="dashboard">
-                    <div class="col-12">
-                        <h2 class="mb-3">Weekly Users Timeline</h2>
-                        <canvas id="timelineChart"></canvas>
-                    </div>
-                    </div>
-                </div>
+          
 
                 <!-- Add a search box for username -->
                 <div class="mt-3">
