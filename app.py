@@ -108,6 +108,11 @@ def index():
     except Exception as e:
         return handle_firestore_error(e)
 
+
+@app.route('/dancers')
+def dancers():
+    return render_template('dancers.html')
+
 @app.route('/update-membership', methods=['POST'])
 def update_membership():
     try:

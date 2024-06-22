@@ -102,7 +102,7 @@ canvas {
 }
 
 .card {
-    width: 240px;
+    width: 28%;
     display: flex;
     flex-direction: column;
     padding: 20px;

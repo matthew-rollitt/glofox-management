@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block header %}
+<title>Users</title>
+{% endblock %}
+{% block body %}
+<div class="container">
+    <h2>Active Users</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Membership</th>
+                <th>Email</th>
+                <th>Edit</th>
+                <th>Action</th>
+                <th>Cancel</th>
+            </tr>
+        </thead>
+        <tbody id="activeUsersBody">
+            <!-- Rows for active users will be inserted here by JavaScript -->
+        </tbody>
+    </table>
+
+    <h2>Paused Users</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Membership</th>
+                <th>Email</th>
+                <th>Edit</th>
+                <th>Action</th>
+                <th>Cancel</th>
+            </tr>
+        </thead>
+        <tbody id="pausedUsersBody">
+            <!-- Rows for paused users will be inserted here by JavaScript -->
+        </tbody>
+    </table>
+
+    <h2>Cancelled Users</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Membership</th>
+                <th>Email</th>
+                <th>Edit</th>
+                <th>Action</th>
+                <th>Cancel</th>
+            </tr>
+        </thead>
+        <tbody id="cancelledUsersBody">
+            <!-- Rows for cancelled users will be inserted here by JavaScript -->
+        </tbody>
+    </table>
+</div>
+{% endblock %}
