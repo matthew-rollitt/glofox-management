@@ -6,7 +6,7 @@
 <div class="container-fluid">
     <div class="row">
         <!-- Main content area -->
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div class="row">
                     <div class="card">
                         <div class="card-body">
@@ -48,122 +48,28 @@
                         </div>
                     </div>
                 </div>
-                    <!-- end of row-->
-                
+                <!-- end of row-->
                     
-                    
-              <!-- Weekly Users Timeline -->
-             <div class="dashboard">
-                <div class="col-12">
-                    <h2 class="mb-3">Weekly Users Timeline</h2>
-                    <canvas id="timelineChart"></canvas>
-                </div>
-                </div>
+                <!-- Weekly Users Timeline -->
                 <div class="dashboard">
-                    <!-- Stacked Bar Chart -->
-                        <h2 class="mb-3">Membership Distribution</h2>
-                        <canvas id="stackedBarChart"></canvas>
+                    <div class="col-12">
+                        <h2 class="mb-3">Weekly Users Timeline</h2>
+                    <canvas id="timelineChart"></canvas>
+                    </div>
                 </div>
-                    <!-- Pie Chart -->
-                    <div class="dashboard">
-                        <h2 class="mb-3">Membership Proportion</h2>
+                <!-- Stacked Bar Chart -->
+                <div class="dashboard">
+                    <h2 class="mb-3">Membership Distribution</h2>
+                    <canvas id="stackedBarChart"></canvas>
+                </div>
+               <!-- Pie Chart -->
+                <div class="dashboard">
+                    <h2 class="mb-3">Membership Proportion</h2>
                         <canvas id="pieChart"></canvas>
-                    </div>
-
-          
-
-                <!-- Add a search box for username -->
-                <div class="mt-3">
-                    <label for="searchUsername">Search Username:</label>
-                    <input type="text" name="searchUsername" id="searchUsername" class="form-control" onkeyup="filterByUsername()">
                 </div>
-                    <!-- Tabs for Active, Paused, and Inactive Users -->
-                    <ul class="nav nav-tabs mb-4" id="userStatusTabs" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="active-tab" data-toggle="tab" href="#activeUsers" role="tab" aria-controls="activeUsers" aria-selected="true">Active Users</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="paused-tab" data-toggle="tab" href="#pausedUsers" role="tab" aria-controls="pausedUsers" aria-selected="false">Paused Users</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="cancelled-tab" data-toggle="tab" href="#cancelledUsers" role="tab" aria-controls="cancelledUsers" aria-selected="false">Cancelled Users</a>
-                        </li>
-                    </ul>
-
-                    <!-- Tab content -->
-                    <div class="tab-content" id="userStatusTabsContent">
-                        <!-- Active Users Tab -->
-                        <div class="tab-pane fade show active" id="activeUsers" role="tabpanel" aria-labelledby="active-tab">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-sm">
-                                    <thead class="thead-dark">
-                                        <tr>
-                                            <th onclick="sortTable(0)">Name</th>
-                                            <th onclick="sortTable(1)">Membership</th>
-                                            <th onclick="sortTable(2)">Email</th>
-                                            <th>Edit</th>
-                                            <th>Pause</th>
-                                            <th>Cancel</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="activeUsersBody">
-                                        <!-- Active Users will be dynamically inserted here -->
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <!-- Paused Users Tab -->
-                        <div class="tab-pane fade" id="pausedUsers" role="tabpanel" aria-labelledby="paused-tab">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-sm">
-                                    <thead class="thead-dark">
-                                        <tr>
-                                            <th onclick="sortTable(0)">Name</th>
-                                            <th onclick="sortTable(1)">Membership</th>
-                                            <th onclick="sortTable(2)">Email</th>
-                                            <th>Edit</th>
-                                            <th>Action</th>
-                                            <th>Cancel</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="pausedUsersBody">
-                                        <!-- Paused Users will be dynamically inserted here -->
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <!-- Cancelled Users Tab -->
-                        <div class="tab-pane fade" id="cancelledUsers" role="tabpanel" aria-labelledby="cancelled-tab">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-sm">
-                                    <thead class="thead-dark">
-                                        <tr>
-                                            <th onclick="sortTable(0)">Name</th>
-                                            <th onclick="sortTable(1)">Membership</th>
-                                            <th onclick="sortTable(2)">Email</th>
-                                            <th>Edit</th>
-                                            <th>Action</th>
-                                            <th>Cancel</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="cancelledUsersBody">
-                                        <!-- Cancelled Users will be dynamically inserted here -->
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {% include 'edit_popup.html' %}
-            </div>
         </main>
     </div>
 </div>
-
-
 <script>
 
 /**
