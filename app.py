@@ -1,20 +1,27 @@
 from flask import Flask, json, jsonify, render_template, request, session, redirect, url_for
 from firebase_admin import credentials, firestore
 import firebase_admin
-
+import os
 
 app = Flask(__name__)
-with open('/Users/admin/go/Code/glofox-management/firebase/secret.json', 'r') as file:
+base_path = os.path.dirname(__file__)
+secret_file = os.path.join(base_path, 'firebase', 'secret.json')
+with open(secret_file, 'r') as file:
     secret_data = json.load(file)
     app.secret_key = secret_data.get('flask', '')
 
-# Initialize Firebase
-cred = credentials.Certificate('/Users/admin/go/Code/glofox-management/firebase/femmanagment-firebase-adminsdk-x7yr6-c361ab0e3b.json')
+cred_file = os.path.join(base_path, 'firebase', 'femmanagment-firebase-adminsdk-x7yr6-c361ab0e3b.json')
+cred = credentials.Certificate(cred_file)
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 def get_user(user_id):
     return db.collection('Users').where('MembershipID', '==', user_id).get()
+
+def get_user(user_id):
+    user_ref = db.collection('Users').where('MembershipID', '==', user_id).stream()
+    return [user for user in user_ref]
+
 
 
 # Error handler for Firestore operations

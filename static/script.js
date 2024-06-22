@@ -102,6 +102,27 @@ function pauseMembership(userId) {
     }
 }
 
+function filterByUsername() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("searchUsername");
+    filter = input.value.toUpperCase();
+    table = document.getElementsByClassName("table");
+    tr = table[0].getElementsByTagName("tr");
+    
+    for (i = 1; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }       
+    }
+}
+
+
 function sortTable(n) {
     var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
     table = document.getElementById("userTable");
