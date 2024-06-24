@@ -33,12 +33,17 @@ def handle_firestore_error(error):
 def get_users():
     try:
         status = request.args.get('status')
+        print("status: "+status)
         users_ref = db.collection('Users')
         query_ref = users_ref.where('status', '==', status) if status else users_ref
         users = [user.to_dict() for user in query_ref.stream()]
+        print(len(users))
         return jsonify(users), 200
     except Exception as e:
         return handle_firestore_error(e)
+    
+
+
 
 @app.route('/get-weekly-users', methods=['GET'])
 def get_weekly_users():
