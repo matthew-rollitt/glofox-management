@@ -12,150 +12,158 @@
                 <label for="searchUsername">Search Username:</label>
                 <input type="text" name="searchUsername" id="searchUsername" class="form-control" onkeyup="filterByUsername()">
             </div>
-            <!-- Tabs for Active, Paused, and Inactive Users -->
-            <ul class="nav nav-tabs mb-4" id="userStatusTabs" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" id="active-tab" data-toggle="tab" href="#activeUsers" role="tab" aria-controls="activeUsers" aria-selected="true">Active Users</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="paused-tab" data-toggle="tab" href="#pausedUsers" role="tab" aria-controls="pausedUsers" aria-selected="false">Paused Users</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="cancelled-tab" data-toggle="tab" href="#cancelledUsers" role="tab" aria-controls="cancelledUsers" aria-selected="false">Cancelled Users</a>
-                </li>
-            </ul>
 
-            <!-- Tab content -->
-            <div class="tab-content" id="userStatusTabsContent">
-                <!-- Active Users Tab -->
-                <div class="tab-pane fade show active" id="activeUsers" role="tabpanel" aria-labelledby="active-tab">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-sm">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th onclick="sortTable(0, 'activeUsers')">Name</th>
-                                    <th onclick="sortTable(1, 'activeUsers')">Membership</th>
-                                    <th onclick="sortTable(2, 'activeUsers')">Email</th>
-                                    <th>Edit</th>
-                                    <th>Pause</th>
-                                    <th>Cancel</th>
-                                </tr>
-                            </thead>
-                            <tbody id="ActiveUsersBody">
-                                <!-- Active Users will be dynamically inserted here -->
-                            </tbody>
-                        </table>
+            <div class="container">
+                <!-- Tabs for Active, Paused, and Inactive Users -->
+                <ul class="nav nav-tabs mb-4" id="userStatusTabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="active-tab" data-toggle="tab" href="#activeUsers" role="tab" aria-controls="activeUsers" aria-selected="true">Active Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="paused-tab" data-toggle="tab" href="#pausedUsers" role="tab" aria-controls="pausedUsers" aria-selected="false">Paused Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="cancelled-tab" data-toggle="tab" href="#cancelledUsers" role="tab" aria-controls="cancelledUsers" aria-selected="false">Cancelled Users</a>
+                    </li>
+                </ul>
+
+                <!-- Tab content -->
+                <div class="tab-content" id="userStatusTabsContent">
+                    <!-- Active Users Tab -->
+                    <div class="tab-pane fade show active" id="activeUsers" role="tabpanel" aria-labelledby="active-tab">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-sm">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th onclick="sortTable(0)">Name</th>
+                                        <th onclick="sortTable(1)">Membership</th>
+                                        <th onclick="sortTable(2)">Email</th>
+                                        <th>Edit</th>
+                                        <th>Pause</th>
+                                        <th>Cancel</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="activeUsersBody">
+                                    <!-- Active Users will be dynamically inserted here -->
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Paused Users Tab -->
-                <div class="tab-pane fade" id="pausedUsers" role="tabpanel" aria-labelledby="paused-tab">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-sm">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th onclick="sortTable(0, 'pausedUsers')">Name</th>
-                                    <th onclick="sortTable(1, 'pausedUsers')">Membership</th>
-                                    <th onclick="sortTable(2, 'pausedUsers')">Email</th>
-                                    <th>Edit</th>
-                                    <th>Action</th>
-                                    <th>Cancel</th>
-                                </tr>
-                            </thead>
-                            <tbody id="PausedUsersBody">
-                                <!-- Paused Users will be dynamically inserted here -->
-                            </tbody>
-                        </table>
+                    <!-- Paused Users Tab -->
+                    <div class="tab-pane fade" id="pausedUsers" role="tabpanel" aria-labelledby="paused-tab">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-sm">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th onclick="sortTable(0)">Name</th>
+                                        <th onclick="sortTable(1)">Membership</th>
+                                        <th onclick="sortTable(2)">Email</th>
+                                        <th>Edit</th>
+                                        <th>Action</th>
+                                        <th>Cancel</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="pausedUsersBody">
+                                    <!-- Paused Users will be dynamically inserted here -->
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Cancelled Users Tab -->
-                <div class="tab-pane fade" id="cancelledUsers" role="tabpanel" aria-labelledby="cancelled-tab">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-sm">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th onclick="sortTable(0, 'cancelledUsers')">Name</th>
-                                    <th onclick="sortTable(1, 'cancelledUsers')">Membership</th>
-                                    <th onclick="sortTable(2, 'cancelledUsers')">Email</th>
-                                    <th>Edit</th>
-                                    <th>Action</th>
-                                    <th>Cancel</th>
-                                </tr>
-                            </thead>
-                            <tbody id="CancelledUsersBody">
-                                <!-- Cancelled Users will be dynamically inserted here -->
-                            </tbody>
-                        </table>
+                    <!-- Cancelled Users Tab -->
+                    <div class="tab-pane fade" id="cancelledUsers" role="tabpanel" aria-labelledby="cancelled-tab">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-sm">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th onclick="sortTable(0)">Name</th>
+                                        <th onclick="sortTable(1)">Membership</th>
+                                        <th onclick="sortTable(2)">Email</th>
+                                        <th>Edit</th>
+                                        <th>Action</th>
+                                        <th>Cancel</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="cancelledUsersBody">
+                                    <!-- Cancelled Users will be dynamically inserted here -->
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </main>
     </div>
 </div>
-{% include 'edit_popup.html' %}
-{% endblock %}
-
 <script>
-function displayUsers(status) {
-    fetch(`/get-users?status=${status}`)
-        .then(response => response.json())
-        .then(users => {
-            console.log(`Users with status ${status}:`, users); // Debugging statement
-
-            const userTableBody = document.getElementById(status + 'UsersBody');
-            if (!userTableBody) {
-                console.error(`Element with ID ${status}UsersBody not found`);
-                return;
-            }
-
-            userTableBody.innerHTML = ''; // Clear existing rows
-
-            // Populate table with users based on status
-            users.forEach(function(user) {
-                var row = '<tr>' +
-                    '<td>' + user.name + '</td>' +
-                    '<td>' + user.membership + '</td>' +
-                    '<td>' + user.email + '</td>' +
-                    '<td class="text-center">' +
-                    '<div onclick="openEditPopup(\'' + user.MembershipID + '\')" style="cursor: pointer;">' +
-                    '<img src="/static/edit.png" alt="Edit" class="icon">' +
-                    '</div>' +
-                    '</td>' +
-                    '<td class="text-center">' + getActionHTML(status, user.MembershipID) + '</td>' +
-                    '<td class="text-center">' +
-                    '<div onclick="cancelMembership(\'' + user.MembershipID + '\')" style="cursor: pointer;">' +
-                    '<img src="/static/cancel.png" alt="Cancel" class="icon">' +
-                    '</div>' +
-                    '</td>' +
-                    '</tr>';
-                userTableBody.innerHTML += row;
+    document.addEventListener('DOMContentLoaded', function() {
+        // Function to fetch and display users based on status
+        var tabs = document.querySelectorAll('.nav-link');
+        tabs.forEach(function(tab) {
+            tab.addEventListener('click', function(event) {
+                event.preventDefault();
+                var target = this.getAttribute('aria-controls');
+                displayUsers(target.replace('Users', '').toLowerCase());
             });
-        })
-        .catch(error => console.error('Error fetching users:', error));
-}
+        });
 
-// Call displayUsers for all statuses
-['Active', 'Paused', 'Cancelled'].forEach(status => displayUsers(status));
+        function displayUsers(status) {
+            alert(status);
+            fetch('/get-users')
+                .then(response => response.json())
+                .then(users => {
+                    // Clear existing rows
+                    document.getElementById(status + 'UsersBody').innerHTML = '';
+                    console.log(len(users));
+                    // Filter users based on status and populate table
+                    users.forEach(function(user) {
+                        console.log(user.status.toLowerCase(), status.toLowerCase());
+                        if (user.status.toLowerCase() === status.toLowerCase()) {
+                            var row = '<tr>' +
+                                '<td>' + user.name + '</td>' +
+                                '<td>' + user.membership + '</td>' +
+                                '<td>' + user.email + '</td>' +
+                                '<td class="text-center">' +
+                                '<div onclick="openEditPopup(\'' + user.MembershipID + '\')" style="cursor: pointer;">' +
+                                '<img src="/static/edit.png" alt="Edit" class="icon">' +
+                                '</div>' +
+                                '</td>' +
+                                '<td class="text-center">' + getActionHTML(status, user.MembershipID) + '</td>' +
+                                '<td class="text-center">' +
+                                '<div onclick="cancelMembership(\'' + user.MembershipID + '\')" style="cursor: pointer;">' +
+                                '<img src="/static/cancel.png" alt="Cancel" class="icon">' +
+                                '</div>' +
+                                '</td>' +
+                                '</tr>';
+                            document.getElementById(status + 'UsersBody').innerHTML += row;
+                        }
+                    });
+                })
+                .catch(error => console.error('Error fetching users:', error));
+        }
 
-// Function to generate action button based on user status
-function getActionHTML(status, membershipID) {
-    switch (status.toLowerCase()) {
-        case 'active':
-            return '<div onclick="pauseMembership(\'' + membershipID + '\')" style="cursor: pointer;">' +
-                '<img src="/static/pause.png" alt="Pause" class="icon">' +
-                '</div>';
-        case 'paused':
-            return '<div onclick="resumeMembership(\'' + membershipID + '\')" style="cursor: pointer;">' +
-                '<img src="/static/play.png" alt="Resume" class="icon" width="20" height="20">' +
-                '</div>';
-        case 'cancelled':
-            return '<div onclick="activateMembership(\'' + membershipID + '\')" style="cursor: pointer;">' +
-                '<img src="/static/play.png" alt="Resume" class="icon" width="20" height="20">' +
-                '</div>';
-        default:
-            return '';
-    }
-}
+        displayUsers('Active'); // Initial display for active users
 
+        function getActionHTML(status, membershipID) {
+            console.log(status, membershipID);
+            switch (status.toLowerCase()) {
+                case 'Active':
+                    return '<div onclick="pauseMembership(\'' + membershipID + '\')" style="cursor: pointer;">' +
+                        '<img src="/static/pause.png" alt="Pause" class="icon">' +
+                        '</div>';
+                case 'Paused':
+                    return '<div onclick="resumeMembership(\'' + membershipID + '\')" style="cursor: pointer;">' +
+                        '<img src="/static/play.png" alt="Resume" class="icon" width="20" height="20">' +
+                        '</div>';
+                case 'Cancelled':
+                    return '<div onclick="activateMembership(\'' + membershipID + '\')" style="cursor: pointer;">' +
+                        '<img src="/static/play.png" alt="Resume" class="icon" width="20" height="20">' +
+                        '</div>';
+                default:
+                    return '';
+            }
+        }
+    });
 </script>
+{% endblock %}

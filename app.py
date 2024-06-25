@@ -33,7 +33,6 @@ def handle_firestore_error(error):
 def get_users():
     try:
         status = request.args.get('status')
-        print("status: "+status)
         users_ref = db.collection('Users')
         query_ref = users_ref.where('status', '==', status) if status else users_ref
         users = [user.to_dict() for user in query_ref.stream()]
@@ -41,9 +40,6 @@ def get_users():
         return jsonify(users), 200
     except Exception as e:
         return handle_firestore_error(e)
-    
-
-
 
 @app.route('/get-weekly-users', methods=['GET'])
 def get_weekly_users():
@@ -103,6 +99,7 @@ def index():
         percent_change_week = round(((current_week_users - last_week) / last_week) * 100, 2)
         percent_change_month = round(((current_week_users - last_month_users) / last_month_users) * 100, 2)
         active_users = len([user for user in users if user['status'] == 'Active'])
+        print(active_users) 
 
         return render_template('index.html', users=users,
                                 current_week_users=current_week_users,
