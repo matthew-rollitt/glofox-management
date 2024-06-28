@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% block title %}
+<title>Schedule</title>
+{% endblock %}
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <h2>Weekly Schedule</h2>
+            <div id="calendar"></div>
+        </main>
+    </div>
+</div>
+
+<!-- Modal for adding/editing classes -->
+<div class="modal fade" id="classModal" tabindex="-1" aria-labelledby="classModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="classModalLabel">Edit Classes</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="classForm">
+                    <input type="hidden" id="classDate">
+                    <div class="mb-3">
+                        <label for="class1" class="form-label">Class 1</label>
+                        <input type="text" class="form-control" id="class1">
+                    </div>
+                    <div class="mb-3">
+                        <label for="class2" class="form-label">Class 2</label>
+                        <input type="text" class="form-control" id="class2">
+                    </div>
+                    <div class="mb-3">
+                        <label for="class3" class="form-label">Class 3 (only for Wed/Thu)</label>
+                        <input type="text" class="form-control" id="class3">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="saveClasses()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+let calendar = new FullCalendar.Calendar(document.getElementById('calendar'), {
+        initialView: 'dayGridMonth',
+        editable: true,
+        selectable: true,
+        events: '/get-weekly-users',
+        eventClick: function(info) {
+            var eventObj = info.event;
+            if (eventObj) {
+                openEditPopup(eventObj.startStr);
+            }
+        },
+        dateClick: function(info) {
+            var date = info.dateStr;
+            openEditPopup(date);
+        }
+    });
+
+    calendar.render();
+
+    function openEditPopup(date) {
+        var classDateInput = document.getElementById('classDate');
+        classDateInput.value = date;
+        
+        // Fetch existing classes for the selected date
+        fetch('/get-classes?date=' + date)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('class1').value = data.class1 || '';
+                document.getElementById('class2').value = data.class2 || '';
+                document.getElementById('class3').value = data.class3 || '';
+            })
+            .catch(error => console.error('Error fetching classes:', error));
+
+        var classModal = new bootstrap.Modal(document.getElementById('classModal'));
+        classModal.show();
+    }
+
+    window.saveClasses = function() {
+        var date = document.getElementById('classDate').value;
+        var class1 = document.getElementById('class1').value;
+        var class2 = document.getElementById('class2').value;
+        var class3 = document.getElementById('class3').value;
+
+        var data = {
+            date: date,
+            class1: class1,
+            class2: class2,
+            class3: class3
+        };
+
+        fetch('/save-classes', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                calendar.refetchEvents();
+            } else {
+                alert('Failed to save classes');
+            }
+        })
+        .catch(error => console.error('Error saving classes:', error));
+
+        var classModal = bootstrap.Modal.getInstance(document.getElementById('classModal'));
+        classModal.hide();
+    }
+});
+</script>
+{% endblock %}

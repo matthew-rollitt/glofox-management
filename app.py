@@ -50,6 +50,39 @@ def get_weekly_users():
     except Exception as e:
         return handle_firestore_error(e)
 
+@app.route('/schedule')
+def schedule():
+    return render_template('schedule.html')
+
+@app.route('/get-classes', methods=['GET'])
+def get_classes():
+    try:
+        date = request.args.get('date')
+        class_ref = db.collection('Classes').document(date)
+        class_doc = class_ref.get()
+        if class_doc.exists:
+            return jsonify(class_doc.to_dict()), 200
+        else:
+            return jsonify({}), 200
+    except Exception as e:
+        return handle_firestore_error(e)
+
+@app.route('/save-classes', methods=['POST'])
+def save_classes():
+    try:
+        data = request.get_json()
+        date = data['date']
+        class_data = {
+            'class1': data['class1'],
+            'class2': data['class2'],
+            'class3': data['class3']
+        }
+        db.collection('Classes').document(date).set(class_data)
+        return jsonify({"success": True}), 200
+    except Exception as e:
+        return handle_firestore_error(e)
+
+
 @app.route('/pausemembership', methods=['POST'])
 def pause_membership():
     try:
